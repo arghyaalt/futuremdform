@@ -1,1 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+/* Light Theme - Default color */
+.light-theme-date-picker::-webkit-calendar-picker-indicator {
+    filter: none;
+  }
+  
+  .light-theme-date-picker::-moz-calendar-picker-indicator {
+    filter: none;
+  }
+  
+  /* Dark Theme - Invert color to white */
+  .dark-theme-date-picker::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+  
+  .dark-theme-date-picker::-moz-calendar-picker-indicator {
+    filter: invert(1);
+  }
+  

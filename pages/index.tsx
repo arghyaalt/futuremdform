@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const FutureMDForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -10,9 +10,17 @@ const FutureMDForm: React.FC = () => {
     referredBy: "",
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const [theme, setTheme] = useState("dark");
+
+  useEffect(() => {
+    document.body.className = theme === "dark" ? "dark-mode" : "light-mode";
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
 
     if (type === "checkbox") {
@@ -53,6 +61,8 @@ const FutureMDForm: React.FC = () => {
     }
   };
 
+  const isDark = theme === "dark";
+
   return (
     <div
       style={{
@@ -64,14 +74,32 @@ const FutureMDForm: React.FC = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#000000",
-        overflow: "hidden",
+        backgroundColor: isDark ? "#000000" : "#FFFFFF",
+        color: isDark ? "#FFFFFF" : "#000000",
+        transition: "all 0.5s ease",
       }}
     >
+      <button
+        onClick={toggleTheme}
+        style={{
+          position: "absolute",
+          top: "20px",
+          right: "20px",
+          padding: "10px",
+          backgroundColor: isDark ? "#374151" : "#D1D5DB",
+          color: isDark ? "#FFFFFF" : "#000000",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer",
+        }}
+      >
+        Toggle {isDark ? "Light" : "Dark"} Mode
+      </button>
+
       {/* Background */}
       <div
         style={{
-          backgroundColor: "#000000",
+          backgroundColor: isDark ? "#000000" : "#FFFFFF",
           position: "fixed",
           top: 0,
           left: 0,
@@ -87,7 +115,6 @@ const FutureMDForm: React.FC = () => {
           width: 843,
           height: 155,
           textAlign: "center",
-          color: "#FFFFFF",
           fontSize: 80,
           fontWeight: "700",
           position: "absolute",
@@ -104,7 +131,6 @@ const FutureMDForm: React.FC = () => {
           textAlign: "center",
           width: 377,
           height: 46,
-          color: "#FFFFFF",
           fontWeight: "600",
           position: "absolute",
           top: "75px",
@@ -132,9 +158,11 @@ const FutureMDForm: React.FC = () => {
             maxWidth: "800px",
             width: "100%",
             padding: "40px",
-            background: "#000000",
+            background: isDark ? "#1F1F1F" : "#F3F4F6",
             borderRadius: "8px",
-            boxShadow: "0px 4px 15px rgba(255, 255, 255, 0.2)",
+            boxShadow: isDark
+              ? "0px 4px 15px rgba(255, 255, 255, 0.2)"
+              : "0px 4px 15px rgba(0, 0, 0, 0.2)",
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
             columnGap: "35px",
@@ -142,19 +170,20 @@ const FutureMDForm: React.FC = () => {
             transition: "box-shadow 0.3s ease-in-out",
           }}
           onMouseEnter={(e) =>
-            (e.currentTarget.style.boxShadow =
-              "0px 10px 30px rgba(255, 255, 255, 0.3)")
+            (e.currentTarget.style.boxShadow = isDark
+              ? "0px 10px 30px rgba(255, 255, 255, 0.3)"
+              : "0px 10px 30px rgba(0, 0, 0, 0.3)")
           }
           onMouseLeave={(e) =>
-            (e.currentTarget.style.boxShadow =
-              "0px 4px 15px rgba(255, 255, 255, 0.2)")
+            (e.currentTarget.style.boxShadow = isDark
+              ? "0px 4px 15px rgba(255, 255, 255, 0.2)"
+              : "0px 4px 15px rgba(0, 0, 0, 0.2)")
           }
         >
           <label
             style={{
               display: "block",
               fontSize: "24px",
-              color: "#FFFFFF",
               fontWeight: "600",
             }}
           >
@@ -170,9 +199,9 @@ const FutureMDForm: React.FC = () => {
                 padding: "13px",
                 marginTop: "4px",
                 fontSize: "16px",
-                backgroundColor: "#1F1F1F",
-                color: "#FFFFFF",
-                border: "2px solid #374151",
+                backgroundColor: isDark ? "#1F1F1F" : "#FFFFFF",
+                color: isDark ? "#FFFFFF" : "#000000",
+                border: `2px solid ${isDark ? "#374151" : "#E5E7EB"}`,
                 borderRadius: "4px",
               }}
             />
@@ -182,7 +211,6 @@ const FutureMDForm: React.FC = () => {
             style={{
               display: "block",
               fontSize: "24px",
-              color: "#FFFFFF",
               fontWeight: "600",
             }}
           >
@@ -193,15 +221,20 @@ const FutureMDForm: React.FC = () => {
               value={formData.birthdate}
               onChange={handleChange}
               required
+              className={isDark ? "dark-theme-date-picker" : "light-theme-date-picker"}
               style={{
                 width: "100%",
                 padding: "12px",
                 marginTop: "4px",
                 fontSize: "16px",
-                backgroundColor: "#1F1F1F",
-                color: "#FFFFFF",
-                border: "2px solid #374151",
+                backgroundColor: isDark ? "#1F1F1F" : "#FFFFFF",
+                color: isDark ? "#FFFFFF" : "#000000",
+                border: `2px solid ${isDark ? "#374151" : "#E5E7EB"}`,
                 borderRadius: "4px",
+                appearance: "none",
+                WebkitAppearance: "none",
+                MozAppearance: "none",
+                fontFamily: "'Inter', 'Sans-Serif",
               }}
             />
           </label>
@@ -210,7 +243,6 @@ const FutureMDForm: React.FC = () => {
             style={{
               display: "block",
               fontSize: "24px",
-              color: "#FFFFFF",
               fontWeight: "600",
             }}
           >
@@ -221,7 +253,7 @@ const FutureMDForm: React.FC = () => {
               checked={formData.termsAccepted}
               onChange={handleChange}
               required
-              style={{ marginLeft: "8px", accentColor: "#3B82F6" }}
+              style={{ marginLeft: "8px", accentColor: isDark ? "#3B82F6" : "#1E40AF" }}
             />
           </label>
 
@@ -229,7 +261,6 @@ const FutureMDForm: React.FC = () => {
             style={{
               display: "block",
               fontSize: "24px",
-              color: "#FFFFFF",
               fontWeight: "600",
             }}
           >
@@ -239,7 +270,7 @@ const FutureMDForm: React.FC = () => {
               name="wantsShawarma"
               checked={formData.wantsShawarma}
               onChange={handleChange}
-              style={{ marginLeft: "8px", accentColor: "#3B82F6" }}
+              style={{ marginLeft: "8px", accentColor: isDark ? "#3B82F6" : "#1E40AF" }}
             />
           </label>
 
@@ -247,7 +278,6 @@ const FutureMDForm: React.FC = () => {
             style={{
               display: "block",
               fontSize: "24px",
-              color: "#FFFFFF",
               gridColumn: "span 2",
               fontWeight: "600",
             }}
@@ -263,17 +293,16 @@ const FutureMDForm: React.FC = () => {
                 padding: "12px",
                 marginTop: "4px",
                 fontSize: "16px",
-                backgroundColor: "#1F1F1F",
-                color: "#FFFFFF",
-                border: "2px solid #374151",
+                backgroundColor: isDark ? "#1F1F1F" : "#FFFFFF",
+                color: isDark ? "#FFFFFF" : "#000000",
+                border: `2px solid ${isDark ? "#374151" : "#E5E7EB"}`,
                 borderRadius: "4px",
-                fontWeight: "600",
               }}
             >
               <option value="">Select an option</option>
               <option value="socialMedia">Social Media</option>
-              <option value="friendsFamily">Friends and Family</option>
-              <option value="teamMember">A team member</option>
+              <option value="friendOrFamily">Friend or Family</option>
+              <option value="advertisement">Advertisement</option>
               <option value="other">Other</option>
             </select>
           </label>
@@ -282,12 +311,11 @@ const FutureMDForm: React.FC = () => {
             style={{
               display: "block",
               fontSize: "24px",
-              color: "#FFFFFF",
               gridColumn: "span 2",
               fontWeight: "600",
             }}
           >
-            Referred by (if applicable, otherwise leave blank)
+            Referred by (Optional):
             <input
               type="text"
               name="referredBy"
@@ -298,9 +326,9 @@ const FutureMDForm: React.FC = () => {
                 padding: "12px",
                 marginTop: "4px",
                 fontSize: "16px",
-                backgroundColor: "#1F1F1F",
-                color: "#FFFFFF",
-                border: "2px solid #374151",
+                backgroundColor: isDark ? "#1F1F1F" : "#FFFFFF",
+                color: isDark ? "#FFFFFF" : "#000000",
+                border: `2px solid ${isDark ? "#374151" : "#E5E7EB"}`,
                 borderRadius: "4px",
               }}
             />
@@ -310,23 +338,22 @@ const FutureMDForm: React.FC = () => {
             type="submit"
             style={{
               gridColumn: "span 2",
-              padding: "15px 20px",
-              fontSize: "24px",
-              fontWeight: "500",
+              padding: "12px 24px",
+              backgroundColor: isDark ? "#3B82F6" : "#1E40AF",
               color: "#FFFFFF",
-              backgroundColor: "#3B82F6",
+              fontSize: "18px",
+              fontWeight: "600",
               border: "none",
               borderRadius: "8px",
               cursor: "pointer",
-              marginTop: "20px",
               fontFamily: "'Inter', 'Sans-Serif",
-              transition: "background-color 0.3s ease",
+              transition: "background-color 0.5s ease", 
             }}
             onMouseEnter={(e) =>
-              (e.currentTarget.style.backgroundColor = "#1E40AF")
+              (e.currentTarget.style.backgroundColor = isDark ? "#1E40AF" : "#3B82F6")
             }
             onMouseLeave={(e) =>
-              (e.currentTarget.style.backgroundColor = "#3B82F6")
+              (e.currentTarget.style.backgroundColor = isDark ? "#3B82F6" : "#1E40AF")
             }
           >
             Submit
