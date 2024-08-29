@@ -88,8 +88,8 @@ const FutureMDForm: React.FC = () => {
           height: 155,
           textAlign: "center",
           color: "#FFFFFF",
-          fontSize: 110,
-          fontWeight: "800",
+          fontSize: 80,
+          fontWeight: "700",
           position: "absolute",
           top: "20px",
           zIndex: 2,
@@ -105,9 +105,9 @@ const FutureMDForm: React.FC = () => {
           width: 377,
           height: 46,
           color: "#FFFFFF",
-          fontWeight: "700",
+          fontWeight: "600",
           position: "absolute",
-          top: "100px",
+          top: "75px",
           zIndex: 2,
           fontSize: 32,
         }}
@@ -134,7 +134,7 @@ const FutureMDForm: React.FC = () => {
             padding: "40px",
             background: "#000000",
             borderRadius: "8px",
-            boxShadow: "0px 4px 10px rgba(255,255,255,0.2)",
+            boxShadow: "0px 4px 15px rgba(255, 255, 255, 0.2)",
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
             columnGap: "35px",
@@ -143,17 +143,22 @@ const FutureMDForm: React.FC = () => {
           }}
           onMouseEnter={(e) =>
             (e.currentTarget.style.boxShadow =
-              "0px 8px 15px rgba(255,255,255,0.5)")
+              "0px 10px 30px rgba(255, 255, 255, 0.3)")
           }
           onMouseLeave={(e) =>
             (e.currentTarget.style.boxShadow =
-              "0px 4px 10px rgba(255,255,255,0.5)")
+              "0px 4px 15px rgba(255, 255, 255, 0.2)")
           }
         >
           <label
-            style={{ display: "block", fontSize: "24px", color: "#FFFFFF", fontWeight: "700", }}
+            style={{
+              display: "block",
+              fontSize: "24px",
+              color: "#FFFFFF",
+              fontWeight: "600",
+            }}
           >
-            Name *
+            Full Name:
             <input
               type="text"
               name="name"
@@ -174,9 +179,14 @@ const FutureMDForm: React.FC = () => {
           </label>
 
           <label
-            style={{ display: "block", fontSize: "24px", color: "#FFFFFF", fontWeight: "700", }}
+            style={{
+              display: "block",
+              fontSize: "24px",
+              color: "#FFFFFF",
+              fontWeight: "600",
+            }}
           >
-            Birthdate *
+            Birthdate:
             <input
               type="date"
               name="birthdate"
@@ -197,9 +207,14 @@ const FutureMDForm: React.FC = () => {
           </label>
 
           <label
-            style={{ display: "block", fontSize: "24px", color: "#FFFFFF",fontWeight: "700", }}
+            style={{
+              display: "block",
+              fontSize: "24px",
+              color: "#FFFFFF",
+              fontWeight: "600",
+            }}
           >
-            Do you agree to our Terms & Conditions? *
+            Do you agree to our Terms & Conditions?:
             <input
               type="checkbox"
               name="termsAccepted"
@@ -211,7 +226,12 @@ const FutureMDForm: React.FC = () => {
           </label>
 
           <label
-            style={{ display: "block", fontSize: "24px", color: "#FFFFFF",fontWeight: "700", }}
+            style={{
+              display: "block",
+              fontSize: "24px",
+              color: "#FFFFFF",
+              fontWeight: "600",
+            }}
           >
             Would you like complementary shawarma?
             <input
@@ -229,10 +249,10 @@ const FutureMDForm: React.FC = () => {
               fontSize: "24px",
               color: "#FFFFFF",
               gridColumn: "span 2",
-              fontWeight: "700",
+              fontWeight: "600",
             }}
           >
-            How did you hear about us? *
+            How did you hear about us?
             <select
               name="heardAboutUs"
               value={formData.heardAboutUs}
@@ -247,7 +267,7 @@ const FutureMDForm: React.FC = () => {
                 color: "#FFFFFF",
                 border: "2px solid #374151",
                 borderRadius: "4px",
-                fontWeight: "700",
+                fontWeight: "600",
               }}
             >
               <option value="">Select an option</option>
@@ -264,7 +284,7 @@ const FutureMDForm: React.FC = () => {
               fontSize: "24px",
               color: "#FFFFFF",
               gridColumn: "span 2",
-              fontWeight: "700",
+              fontWeight: "600",
             }}
           >
             Referred by (if applicable, otherwise leave blank)
@@ -282,7 +302,6 @@ const FutureMDForm: React.FC = () => {
                 color: "#FFFFFF",
                 border: "2px solid #374151",
                 borderRadius: "4px",
-                
               }}
             />
           </label>
