@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ToggleButton from "./ToggleButton"; // Import the ToggleButton component
 
 const FutureMDForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -10,15 +11,11 @@ const FutureMDForm: React.FC = () => {
     referredBy: "",
   });
 
-  const [theme, setTheme] = useState("dark");
+  const [selectedTheme, setSelectedTheme] = useState<"dark" | "light">("dark");
 
   useEffect(() => {
-    document.body.className = theme === "dark" ? "dark-mode" : "light-mode";
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
+    document.body.className = selectedTheme === "dark" ? "dark-mode" : "light-mode";
+  }, [selectedTheme]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -61,7 +58,7 @@ const FutureMDForm: React.FC = () => {
     }
   };
 
-  const isDark = theme === "dark";
+  const isDark = selectedTheme === "dark";
 
   return (
     <div
@@ -79,22 +76,9 @@ const FutureMDForm: React.FC = () => {
         transition: "all 0.5s ease",
       }}
     >
-      <button
-        onClick={toggleTheme}
-        style={{
-          position: "absolute",
-          top: "20px",
-          right: "20px",
-          padding: "10px",
-          backgroundColor: isDark ? "#374151" : "#D1D5DB",
-          color: isDark ? "#FFFFFF" : "#000000",
-          border: "none",
-          borderRadius: "8px",
-          cursor: "pointer",
-        }}
-      >
-        Toggle {isDark ? "Light" : "Dark"} Mode
-      </button>
+      <div style={{ position: "absolute", top: "20px", right: "20px" }}>
+        <ToggleButton selected={selectedTheme} setSelected={setSelectedTheme} />
+      </div>
 
       {/* Background */}
       <div
@@ -300,8 +284,8 @@ const FutureMDForm: React.FC = () => {
               }}
             >
               <option value="">Select an option</option>
-              <option value="socialMedia">Social Media</option>
-              <option value="friendOrFamily">Friend or Family</option>
+              <option value="friend">A friend</option>
+              <option value="socialMedia">Social media</option>
               <option value="advertisement">Advertisement</option>
               <option value="other">Other</option>
             </select>
@@ -315,7 +299,7 @@ const FutureMDForm: React.FC = () => {
               fontWeight: "600",
             }}
           >
-            Referred by (Optional):
+            If you were referred, who referred you?
             <input
               type="text"
               name="referredBy"
@@ -323,7 +307,7 @@ const FutureMDForm: React.FC = () => {
               onChange={handleChange}
               style={{
                 width: "100%",
-                padding: "12px",
+                padding: "13px",
                 marginTop: "4px",
                 fontSize: "16px",
                 backgroundColor: isDark ? "#1F1F1F" : "#FFFFFF",
@@ -338,23 +322,18 @@ const FutureMDForm: React.FC = () => {
             type="submit"
             style={{
               gridColumn: "span 2",
-              padding: "12px 24px",
+              padding: "15px",
+              fontSize: "20px",
+              fontWeight: "600",
+              borderRadius: "4px",
+              cursor: "pointer",
               backgroundColor: isDark ? "#3B82F6" : "#1E40AF",
               color: "#FFFFFF",
-              fontSize: "18px",
-              fontWeight: "600",
               border: "none",
-              borderRadius: "8px",
-              cursor: "pointer",
-              fontFamily: "'Inter', 'Sans-Serif",
-              transition: "background-color 0.5s ease", 
+              transition: "background-color 0.3s ease",
             }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.backgroundColor = isDark ? "#1E40AF" : "#3B82F6")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.backgroundColor = isDark ? "#3B82F6" : "#1E40AF")
-            }
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = isDark ? "#3B82F6" : "#1E40AF")}
           >
             Submit
           </button>
